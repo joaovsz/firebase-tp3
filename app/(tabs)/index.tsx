@@ -1,31 +1,55 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import AppBar from "@/components/AppBar/AppBar";
+import CustomTable from "@/components/DataTable/DataTable";
+import FabButton from "@/components/Fab";
+import SwitchComponent from "@/components/Switch/Switch";
+import { Text, View } from "@/components/Themed";
+import React, { useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { Title } from "react-native-paper";
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <View>
+        <Text style={styles.title}>Componentes solicitados:</Text>
+      </View>
+      <AppBar />
+      <FabButton />
+      <SwitchComponent />
+      <View style={styles.section}>
+        <Title style={styles.componentTitle}>DataTable</Title>
+        <CustomTable />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+    minHeight: "100%",
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  section: {
+    marginBottom: 20,
+    padding: 15,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  componentTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 10,
   },
 });
