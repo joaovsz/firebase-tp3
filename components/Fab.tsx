@@ -1,9 +1,17 @@
+import { useAuth } from "@/app/context/AuthContext";
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
 const FabButton = () => {
-  return <FAB icon="logout" style={styles.fab} onPress={() => {}} />;
+  const { logout } = useAuth();
+  return (
+    <FAB
+      icon="logout"
+      style={styles.fab}
+      onPress={async () => await logout()}
+    />
+  );
 };
 
 const styles = StyleSheet.create({

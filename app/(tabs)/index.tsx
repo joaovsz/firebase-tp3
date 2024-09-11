@@ -2,7 +2,7 @@ import AppBar from "@/components/AppBar/AppBar";
 import CustomTable from "@/components/DataTable/DataTable";
 import FabButton from "@/components/Fab";
 import SwitchComponent from "@/components/Switch/Switch";
-import { Text, View } from "@/components/Themed";
+import { Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Title } from "react-native-paper";
@@ -27,7 +27,6 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: "#f5f5f5",
     minHeight: "100%",
   },
   title: {
@@ -39,7 +38,6 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     padding: 15,
-    backgroundColor: "#fff",
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },

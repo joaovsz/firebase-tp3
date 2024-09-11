@@ -4,14 +4,16 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
+import { useAuth } from "./context/AuthContext";
 
 export const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
   const signIn = async () => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);

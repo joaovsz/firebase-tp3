@@ -2,7 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
   DefaultTheme,
-  ThemeProvider,
+  ThemeProvider as NavigationThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
+import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider, useTheme } from "./context/ThemeProvider"; // Seu ThemeProvider personalizado
+import { MD3DarkTheme } from "react-native-paper";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -18,7 +21,6 @@ export {
 } from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)",
 };
 
@@ -40,21 +42,29 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
-  
-  return <RootLayoutNav isFontsLoaded={loaded} />;
+
+  return (
+    <ThemeProvider>
+    
+      <RootLayoutNav isFontsLoaded={loaded} />
+    </ThemeProvider>
+  );
 }
 
 function RootLayoutNav({ isFontsLoaded }: { isFontsLoaded: boolean }) {
-  const colorScheme = useColorScheme();
+  const { paperTheme } = useTheme();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        {/* Exibe as telas mesmo se as fontes ainda não tiverem sido carregadas */}
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
-    </ThemeProvider>
+    <NavigationThemeProvider
+      value={paperTheme === MD3DarkTheme ? DarkTheme : DefaultTheme}
+    >
+      <AuthProvider>
+        <Stack initialRouteName="index">
+          <Stack.Screen name="resetpassword" />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </AuthProvider>
+    </NavigationThemeProvider>
   );
 }
