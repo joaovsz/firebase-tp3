@@ -6,8 +6,22 @@ import { Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Title } from "react-native-paper";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "expo-router";
 
 export default function TabOneScreen() {
+  const { isAuthenticated, user, logout } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("isAuthenticated:", isAuthenticated, "user:", user);
+
+    if (!isAuthenticated || user === null) {
+      router.push({ pathname: "/" });
+      console.log("redirect");
+    }
+  }, [isAuthenticated, user]);
+
   return (
     <View style={styles.container}>
       <View>

@@ -7,9 +7,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
-import { useAuth } from "./context/AuthContext";
 
-export const Index = () => {
+const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -40,6 +39,7 @@ export const Index = () => {
       <TextInput
         style={styles.textInput}
         placeholder="email"
+        keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />
@@ -58,7 +58,7 @@ export const Index = () => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.replace("/resetpassword")}
+        onPress={() => router.push("/reset")}
       >
         <Text style={styles.text}>Esqueci Minha senha</Text>
       </TouchableOpacity>

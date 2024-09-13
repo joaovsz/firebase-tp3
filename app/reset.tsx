@@ -3,13 +3,14 @@ import { useState } from "react";
 import {
   Alert,
   KeyboardAvoidingView,
+  SafeAreaView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import { Button, Card, TextInput } from "react-native-paper";
 
-export const Resetpassword = () => {
+const Reset = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +38,7 @@ export const Resetpassword = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Card style={styles.card}>
         <Text>Esqueci minha senha</Text>
 
@@ -59,9 +60,11 @@ export const Resetpassword = () => {
           Enviar e-mail de redefinição
         </Button>
       </Card>
-    </View>
+    </SafeAreaView>
   );
 };
+export default Reset;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider, useTheme } from "./context/ThemeProvider"; // Seu ThemeProvider personalizado
 import { MD3DarkTheme } from "react-native-paper";
 
@@ -45,7 +45,6 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-    
       <RootLayoutNav isFontsLoaded={loaded} />
     </ThemeProvider>
   );
@@ -59,9 +58,9 @@ function RootLayoutNav({ isFontsLoaded }: { isFontsLoaded: boolean }) {
       value={paperTheme === MD3DarkTheme ? DarkTheme : DefaultTheme}
     >
       <AuthProvider>
-        <Stack initialRouteName="index">
-          <Stack.Screen name="resetpassword" />
+        <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="reset" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
       </AuthProvider>
